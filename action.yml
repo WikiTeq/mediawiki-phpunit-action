@@ -17,31 +17,35 @@ inputs:
   testgroup:
     description: 'Extension tests @group'
     required: true
+  type:
+    description: 'Is it an extension or skin'
+    required: false
+    default: 'extension'
 runs:
   using: 'composite'
   steps:
-    - name: Setup PHP
+    - name: Install PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ inputs.php }}
         extensions: mbstring, intl
         tools: composer:2.1.14
 
-    - name: Cache Composer cache
+    - name: Add Composer cache
       uses: actions/cache@v2
       with:
         path: ~/.composer/cache
         key: composer-php${{ inputs.php }}
 
     - name: Install MediaWiki
-      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.mwbranch }} ${{ inputs.extension }}
+      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.mwbranch }} ${{ inputs.extension }} ${{ inputs.type }}
       shell: bash
 
     - uses: actions/checkout@v2
       with:
-        path: mediawiki/extensions/${{ inputs.extension }}
+        path: mediawiki/${{ inputs.type }}s/${{ inputs.extension }}
 
-    - name: Composer update
+    - name: Composer updates
       working-directory: mediawiki
       run: composer update
       shell: bash
