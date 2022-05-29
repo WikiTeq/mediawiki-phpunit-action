@@ -11,7 +11,7 @@ PHPUnit tests for your extension or skin repo:
 # Usage
 
 ```yaml
-- uses: wikiteq/mediawiki-phpunit-action@v1
+- uses: wikiteq/mediawiki-phpunit-action@v2
   with:
     php: 7.4
     mwbranch: REL1_35
@@ -64,7 +64,7 @@ jobs:
       # run the action to install MediaWiki, PHP, Composer
       # and run PHPUnit tests for the extension
       - name: Mediawiki PHPUnit
-        uses: wikiteq/mediawiki-phpunit-action@v1
+        uses: wikiteq/mediawiki-phpunit-action@v2
         with:
           php: ${{ matrix.php }}
           mwbranch: ${{ matrix.mw }}
