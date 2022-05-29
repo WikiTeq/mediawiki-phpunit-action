@@ -1,0 +1,52 @@
+name: 'Mediawiki Extension PHPUnit Runner'
+description: 'Setups MediaWiki and runs PHPUnit test for an extension'
+author: 'WikiTeq'
+branding:
+  color: yellow
+  icon: book-open
+inputs:
+  php:
+    description: 'PHP version'
+    required: true
+  mwbranch:
+    description: 'Mediawiki branch to test against'
+    required: true
+  extension:
+    description: 'Extension name to test'
+    required: true
+  testgroup:
+    description: 'Extension tests @group'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php }}
+        extensions: mbstring, intl
+        tools: composer:2.1.14
+
+    - name: Cache Composer cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.composer/cache
+        key: composer-php${{ inputs.php }}
+
+    - name: Install MediaWiki
+      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.mwbranch }} ${{ inputs.extension }}
+      shell: bash
+
+    - uses: actions/checkout@v2
+      with:
+        path: mediawiki/extensions/${{ inputs.extension }}
+
+    - name: Composer update
+      working-directory: mediawiki
+      run: composer update
+      shell: bash
+
+    - name: Run PHPUnit
+      working-directory: mediawiki
+      run: php tests/phpunit/phpunit.php --group ${{ inputs.testgroup }}
+      shell: bash

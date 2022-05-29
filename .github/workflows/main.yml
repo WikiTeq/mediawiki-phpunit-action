@@ -1,0 +1,18 @@
+on: [push]
+
+jobs:
+  mediawiki-extension-action:
+    runs-on: ubuntu-latest
+    name: Dummy extension test
+    steps:
+      # check out the repository
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Test dummy extension
+        uses: ./ # Uses an action in the root directory
+        id: extension-test
+        with:
+          php: 7.4
+          mwbranch: REL1_35
+          extension: DummyExtension
+          testgroup: extension-DummyExtension
