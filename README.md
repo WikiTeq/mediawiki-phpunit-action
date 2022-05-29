@@ -1,7 +1,7 @@
 # Mediawiki Extension PHPUnit Runner
 
 The action is a [composite action](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action)
-that uses the following actions to install an ephemeral MediaWiki instance with Composer and PHP on board and run
+that uses the following actions to install an ephemeral [MediaWiki](https://mediawiki.org) instance with Composer and PHP on board and run
 PHPUnit tests for your extension repo:
 
 * [shivammathur/setup-php](https://github.com/shivammathur/setup-php)
@@ -11,7 +11,7 @@ PHPUnit tests for your extension repo:
 # Usage
 
 ```yaml
-- uses: actions/mediawiki-phpunit@v1
+- uses: wikiteq/mediawiki-phpunit-action@v1
   with:
     php: 7.4
     mwbranch: REL1_35
@@ -63,7 +63,7 @@ jobs:
       # run the action to install MediaWiki, PHP, Composer
       # and run PHPUnit tests for the extension
       - name: Mediawiki PHPUnit
-        uses: actions/mediawiki-phpunit@v1
+        uses: wikiteq/mediawiki-phpunit-action@v1
         with:
           php: ${{ matrix.php }}
           mwbranch: ${{ matrix.mw }}
