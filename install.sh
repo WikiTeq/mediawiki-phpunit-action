@@ -44,8 +44,8 @@ cat <<EOT >> composer.local.json
     "merge-plugin": {
       "merge-dev": true,
       "include": [
-        "extensions/*/composer.json",
-        "skins/*/composer.json"
+        "extensions/**/composer.json",
+        "skins/**/composer.json"
       ]
     }
   }
