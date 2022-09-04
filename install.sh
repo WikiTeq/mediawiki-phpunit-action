@@ -21,7 +21,7 @@ php maintenance/install.php \
   --dbname mw \
   --dbpath $(pwd) \
   --confpath $(pwd) \
-  --pass DummyAdminPassword DummyWikiName DummyAdminUser > /dev/null
+  --pass DummyAdminPassword DummyWikiName DummyAdminUser
 
 # https://www.mediawiki.org/wiki/Manual:$wgShowExceptionDetails
 echo '$wgShowExceptionDetails = true;' >> LocalSettings.php
