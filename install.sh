@@ -14,7 +14,7 @@ tar -zxf $MW_BRANCH.tar.gz
 mv mediawiki-$MW_BRANCH mediawiki
 
 # Install composer dependencies
-cd mediawiki
+cd mediawiki && composer install
 php maintenance/install.php \
   --dbtype sqlite \
   --dbuser root \
