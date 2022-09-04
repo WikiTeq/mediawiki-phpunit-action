@@ -37,7 +37,7 @@ else
 fi
 
 # Include everything from `extensions` and `skins` directories
-cat <<EOT >> composer.local.json
+cat <<EOT >> mediawiki/composer.local.json
 {
   "require": {},
   "extra": {
