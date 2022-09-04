@@ -47,7 +47,12 @@ runs:
 
     - name: Composer updates
       working-directory: mediawiki
-      run: composer update
+      run: composer install && composer update
+      shell: bash
+
+    - name: Run updates
+      working-directory: mediawiki
+      run: php maintenance/update.php --quick
       shell: bash
 
     - name: Run PHPUnit

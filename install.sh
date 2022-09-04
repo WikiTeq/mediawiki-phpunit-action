@@ -40,14 +40,14 @@ fi
 cat <<EOT >> composer.local.json
 {
   "require": {},
-	"extra": {
-		"merge-plugin": {
-			"merge-dev": true,
-			"include": [
-				"extensions/*/composer.json",
-				"skins/*/composer.json"
-			]
-		}
-	}
+  "extra": {
+    "merge-plugin": {
+      "merge-dev": true,
+      "include": [
+        "extensions/*/composer.json",
+        "skins/*/composer.json"
+      ]
+    }
+  }
 }
 EOT
