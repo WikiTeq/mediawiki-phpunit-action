@@ -40,6 +40,14 @@ else
     echo "{\"require\": {},\"extra\": {\"merge-plugin\": {\"merge-dev\": true,\"include\": [\"skins/$EXTENSION_NAME/composer.json\"]}}}" >> composer.local.json
 fi
 
+echo "========================================================"
+cat composer.local.json
+echo "========================================================"
+cat LocalSettings.php
+echo "========================================================"
+
+sleep 10
+
 # Include everything from `extensions` and `skins` directories
 #cat <<EOT > composer.local.json
 #{
