@@ -47,7 +47,7 @@ runs:
 
     - name: Composer updates
       working-directory: mediawiki
-      run: composer install && composer update
+      run: composer install --dev && composer update
       shell: bash
 
     - name: Run updates
