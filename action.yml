@@ -47,7 +47,7 @@ runs:
 
     - name: Composer updates
       working-directory: mediawiki
-      run: rm -rf vendor && composer update
+      run: composer update
       shell: bash
 
     - name: Run updates
