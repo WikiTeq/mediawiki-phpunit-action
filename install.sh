@@ -15,7 +15,6 @@ mv mediawiki-$MW_BRANCH mediawiki
 
 # Install composer dependencies
 cd mediawiki
-composer -q install --dev
 php maintenance/install.php \
   --dbtype sqlite \
   --dbuser root \
