@@ -46,7 +46,6 @@ cat <<EOT > composer.local.json
   "extra": {
     "merge-plugin": {
       "merge-dev": true,
-      "merge-extra": true,
       "include": [
         "extensions/*/composer.json",
         "skins/*/composer.json"
@@ -57,4 +56,3 @@ cat <<EOT > composer.local.json
 EOT
 
 sed -i 's/"merge-dev": false/"merge-dev": true/' composer.json
-cat composer.json
