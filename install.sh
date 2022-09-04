@@ -14,7 +14,8 @@ tar -zxf $MW_BRANCH.tar.gz
 mv mediawiki-$MW_BRANCH mediawiki
 
 # Install composer dependencies
-cd mediawiki && composer -q install
+cd mediawiki
+composer -q install
 php maintenance/install.php \
   --dbtype sqlite \
   --dbuser root \
@@ -37,7 +38,7 @@ else
 fi
 
 # Include everything from `extensions` and `skins` directories
-cat <<EOT >> mediawiki/composer.local.json
+cat <<EOT >> composer.local.json
 {
   "require": {},
   "extra": {
