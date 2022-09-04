@@ -57,4 +57,4 @@ cat <<EOT > composer.local.json
 EOT
 
 sed -i 's/"merge-dev": false/"merge-dev": true/' composer.json
-
+cat composer.json
