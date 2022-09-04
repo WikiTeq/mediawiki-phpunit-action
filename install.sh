@@ -32,10 +32,10 @@ echo '$wgDevelopmentWarnings = true;' >> LocalSettings.php
 # Loads extension or skin depending on type option provided
 if [ "$TYPE" = "extension" ]; then
     echo "wfLoadExtension( '$EXTENSION_NAME' );" >> LocalSettings.php
-    echo "\"require\": {},\"extra\": {\"merge-plugin\": {\"merge-dev\": true,\"include\": [\"extensions/$EXTENSION_NAME/composer.json\"]}}}" > composer.local.json
+    echo "{\"require\": {},\"extra\": {\"merge-plugin\": {\"merge-dev\": true,\"include\": [\"extensions/$EXTENSION_NAME/composer.json\"]}}}" > composer.local.json
 else
     echo "wfLoadSkin( '$EXTENSION_NAME' );" >> LocalSettings.php
-    echo "\"require\": {},\"extra\": {\"merge-plugin\": {\"merge-dev\": true,\"include\": [\"skins/$EXTENSION_NAME/composer.json\"]}}}" > composer.local.json
+    echo "{\"require\": {},\"extra\": {\"merge-plugin\": {\"merge-dev\": true,\"include\": [\"skins/$EXTENSION_NAME/composer.json\"]}}}" > composer.local.json
 fi
 
 # Include everything from `extensions` and `skins` directories
