@@ -20,6 +20,7 @@ php maintenance/install.php \
   --dbuser root \
   --dbname mw \
   --dbpath $(pwd) \
+  --confpath $(pwd) \
   --pass DummyAdminPassword DummyWikiName DummyAdminUser > /dev/null
 
 # https://www.mediawiki.org/wiki/Manual:$wgShowExceptionDetails
