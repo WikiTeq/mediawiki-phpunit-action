@@ -1,0 +1,15 @@
+!! options
+version=2
+parsoid-compatible
+!! end
+
+!! test
+Simple
+!! options
+parsoid={ "modes": ["wt2html","wt2wt"], "normalizePhp": true }
+!! wikitext
+Foo ''bar''
+!! html
+<p>Foo <i>bar</i></p>
+!! end
+
