@@ -10,5 +10,6 @@ parsoid={ "modes": ["wt2html","wt2wt"], "normalizePhp": true }
 !! wikitext
 Foo ''bar''
 !! html
-<p>Foo <i>bar</i></p>
+<p>Foo <i>bar</i>
+</p>
 !! end
