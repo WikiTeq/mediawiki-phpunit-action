@@ -12,4 +12,3 @@ Foo ''bar''
 !! html
 <p>Foo <i>bar</i></p>
 !! end
-
