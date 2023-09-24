@@ -4,7 +4,6 @@ use DummyExtension\DummyExtension;
 
 /**
  * Class DummyExtensionTest
- * @group extension-DummyExtension
  */
 class DummyExtensionTest extends MediaWikiLangTestCase {
 

@@ -16,7 +16,6 @@ PHPUnit tests for your extension or skin repo:
     php: 7.4
     mwbranch: REL1_35
     extension: DummyExtension
-    testgroup: extension-DummyExtension
 ```
 
 # Inputs
@@ -24,7 +23,6 @@ PHPUnit tests for your extension or skin repo:
 * `php` - version of PHP to install
 * `mwbranch` - MediaWiki branch to install
 * `extension` - extension name to test (this should match the desired extension directory)
-* `testgroup` - @group of tests to run (this should match your extension group defined on unit tests)
 * `type` - (optional) either can be `extension` or `skin`, default value is `extension`
 
 # Example
@@ -69,7 +67,6 @@ jobs:
           php: ${{ matrix.php }}
           mwbranch: ${{ matrix.mw }}
           extension: MyExtension
-          testgroup: extension-MyExtension
 ```
 
 Example of adding a group to your extension tests:
