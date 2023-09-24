@@ -13,6 +13,5 @@ jobs:
         id: extension-test
         with:
           php: 7.4
-          mwbranch: REL1_35
+          mwbranch: REL1_39
           extension: DummyExtension
-          testgroup: extension-DummyExtension

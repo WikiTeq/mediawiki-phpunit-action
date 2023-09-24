@@ -14,9 +14,6 @@ inputs:
   extension:
     description: 'Extension name to test'
     required: true
-  testgroup:
-    description: 'Extension tests @group'
-    required: true
   type:
     description: 'Is it an extension or skin'
     required: false
@@ -57,5 +54,5 @@ runs:
 
     - name: Run PHPUnit
       working-directory: mediawiki
-      run: php tests/phpunit/phpunit.php --group ${{ inputs.testgroup }}
+      run: php tests/phpunit/phpunit.php --testsuite extensions --exclude-group Broken,ParserFuzz,Stub
       shell: bash
