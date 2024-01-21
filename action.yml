@@ -18,6 +18,10 @@ inputs:
     description: 'Is it an extension or skin'
     required: false
     default: 'extension'
+  loadsubmodules:
+    description: 'Whether to load MediaWiki git submodules (`yes` to enable)'
+    required: false
+    default: 'no'
 runs:
   using: 'composite'
   steps:
@@ -35,7 +39,7 @@ runs:
         key: composer-php${{ inputs.php }}
 
     - name: Install MediaWiki
-      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.mwbranch }} ${{ inputs.extension }} ${{ inputs.type }}
+      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.mwbranch }} ${{ inputs.extension }} ${{ inputs.type }} ${{ inputs.loadsubmodules }}
       shell: bash
 
     - uses: actions/checkout@v2

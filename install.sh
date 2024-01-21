@@ -5,6 +5,7 @@ set -o pipefail
 MW_BRANCH=$1
 EXTENSION_NAME=$2
 TYPE=$3
+LOAD_SUBMODULES=$4
 
 # Download wiki release
 wget https://github.com/wikimedia/mediawiki/archive/$MW_BRANCH.tar.gz -nv -q
@@ -15,6 +16,12 @@ mv mediawiki-$MW_BRANCH mediawiki
 
 # Install composer dependencies
 cd mediawiki && composer install
+
+# Only load submodules if requested
+if [ "$LOAD_SUBMODULES" = "yes" ]; then
+    git submodule update --init --recursive
+fi
+
 php maintenance/install.php \
   --dbtype sqlite \
   --dbuser root \
