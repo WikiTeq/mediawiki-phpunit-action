@@ -77,7 +77,7 @@ Example of adding a group to your extension tests:
 /**
  * @group extension-MyExtension
  */
-class MyExtensionTest extends MediaWikiTestCase {
+class MyExtensionTest extends MediaWikiIntegrationTestCase {
     // ...
 }
 ```
