@@ -34,8 +34,15 @@ runs:
         path: ~/.composer/cache
         key: composer-php${{ inputs.php }}
 
+    - name: Download Mediawiki
+      uses: actions/checkout@v2
+      with:
+        path: mediawiki
+        repository: wikimedia/mediawiki
+        ref: ${{ inputs.mwbranch }}
+
     - name: Install MediaWiki
-      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.mwbranch }} ${{ inputs.extension }} ${{ inputs.type }}
+      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.extension }} ${{ inputs.type }}
       shell: bash
 
     - uses: actions/checkout@v2
