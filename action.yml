@@ -18,6 +18,10 @@ inputs:
     description: 'Is it an extension or skin'
     required: false
     default: 'extension'
+  extra_file:
+    description: 'Path relative to the extension for a PHP file to load in settings'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
@@ -42,7 +46,7 @@ runs:
         ref: ${{ inputs.mwbranch }}
 
     - name: Install MediaWiki
-      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.extension }} ${{ inputs.type }}
+      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.extension }} ${{ inputs.type }} ${{ inputs.extra_file }}
       shell: bash
 
     - uses: actions/checkout@v2

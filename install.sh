@@ -4,6 +4,7 @@ set -o pipefail
 
 EXTENSION_NAME=$1
 TYPE=$2
+EXTRA_INCLUDE_FILE=$3
 
 # Install composer dependencies
 cd mediawiki && composer install
@@ -29,6 +30,19 @@ if [ "$TYPE" = "extension" ]; then
     echo "wfLoadExtension( '$EXTENSION_NAME' );" >> LocalSettings.php
 else
     echo "wfLoadSkin( '$EXTENSION_NAME' );" >> LocalSettings.php
+fi
+
+# Allow extensions to add their own extra configuration
+if [ -n "${EXTRA_INCLUDE_FILE}" ]; then
+  # Path should be relative to the directory of the extension itself
+  if [ "$TYPE" = "extension" ]; then
+    INCLUDE_PREFIX="\$IP/extensions/$EXTENSION_NAME"
+  else
+    INCLUDE_PREFIX="\$IP/skins/$EXTENSION_NAME"
+  fi
+
+  INCLUDE_PATH="$INCLUDE_PREFIX/$EXTRA_INCLUDE_FILE"
+  echo "require_once \"$INCLUDE_PATH\";" >> LocalSettings.php
 fi
 
 # Include everything from `extensions` and `skins` directories
