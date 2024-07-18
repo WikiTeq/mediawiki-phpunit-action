@@ -22,15 +22,22 @@ inputs:
     description: 'Path relative to the extension for a PHP file to load in settings'
     required: false
     default: ''
+  use_mysql:
+    description: Use MySQL instead of SQLite
+    required: false
+    default: false
 runs:
   using: 'composite'
   steps:
+
     - name: Install PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ inputs.php }}
-        extensions: mbstring, intl
+        extensions: ${{ env.PHP_EXTENSIONS }}
         tools: composer:2.1.14
+      env:
+        PHP_EXTENSIONS: ${{ inputs.use_mysql && 'mbstring, intl, mysqli' || 'mbstring, intl' }}
 
     - name: Add Composer cache
       uses: actions/cache@v2
@@ -46,7 +53,7 @@ runs:
         ref: ${{ inputs.mwbranch }}
 
     - name: Install MediaWiki
-      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.extension }} ${{ inputs.type }} ${{ inputs.extra_file }}
+      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.extension }} ${{ inputs.type }} ${{ inputs.use_mysql }} ${{ inputs.extra_file }}
       shell: bash
 
     - uses: actions/checkout@v2
