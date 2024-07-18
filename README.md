@@ -24,6 +24,7 @@ PHPUnit tests for your extension or skin repo:
 * `mwbranch` - MediaWiki branch to install
 * `extension` - extension name to test (this should match the desired extension directory)
 * `type` - (optional) either can be `extension` or `skin`, default value is `extension`
+* `use_mysql` - (optional) whether to use MySQL instead of SQLite
 
 # Example
 

@@ -4,12 +4,27 @@ set -o pipefail
 
 EXTENSION_NAME=$1
 TYPE=$2
-EXTRA_INCLUDE_FILE=$3
+USE_MYSQL=$3
+EXTRA_INCLUDE_FILE=$4
+
+if [ "$USE_MYSQL" = "true" ]; then
+  DB_TYPE="mysql"
+  DB_SERVER="127.0.0.1"
+  # We need to start MySQL, but not sqlite
+  sudo systemctl start mysql
+else
+  DB_TYPE="sqlite"
+  DB_SERVER="localhost"
+fi
 
 # Install composer dependencies
 cd mediawiki && composer install
+
+# We can have --dbpass with 'root' for MySQL without breaking SQLite since
+# the SQLite installer just clears that, it doesn't use a password
 php maintenance/install.php \
-  --dbtype sqlite \
+  --dbtype $DB_TYPE \
+  --dbpass 'root' \
   --dbuser root \
   --dbname mw \
   --dbpath $(pwd) \
