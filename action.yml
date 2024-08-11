@@ -64,6 +64,10 @@ runs:
       with:
         path: mediawiki/${{ inputs.type }}s/${{ inputs.extension }}
 
+    - name: Install dependencies of dependency installation
+      run: sudo apt-get install -y jq
+      shell: bash
+
     - name: Install dependencies
       run: bash $GITHUB_ACTION_PATH/deps.sh "${{ inputs.dependencies }}"
       shell: bash
