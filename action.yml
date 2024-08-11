@@ -26,6 +26,10 @@ inputs:
     description: Use MySQL instead of SQLite
     required: false
     default: false
+  dependencies:
+    description: JSON encoded array of dependencies to pass to checkouts
+    required: false
+    default: '[]'
 runs:
   using: 'composite'
   steps:
@@ -59,6 +63,11 @@ runs:
     - uses: actions/checkout@v2
       with:
         path: mediawiki/${{ inputs.type }}s/${{ inputs.extension }}
+
+    - name: Install dependencies
+      uses: ./dependency-action.yml
+      with:
+        dependencies: ${{ inputs.dependencies }}
 
     - name: Composer updates
       working-directory: mediawiki
