@@ -65,7 +65,7 @@ runs:
         path: mediawiki/${{ inputs.type }}s/${{ inputs.extension }}
 
     - name: Install dependencies
-      uses: ./dependency-action.yml
+      uses: ./dependency-action
       with:
         dependencies: ${{ inputs.dependencies }}
 
