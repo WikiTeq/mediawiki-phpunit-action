@@ -1,8 +1,10 @@
-on:
-  push:
-    branches:
-      - master
-  pull_request:
+on: [push]
+
+dependencies: &dependencies
+  - name: examples
+    checkout:
+      path: mediawiki/extensions/examples
+      repository: wikimedia/mediawiki-extensions-examples
 
 jobs:
   mediawiki-extension-action-sqlite:
@@ -19,9 +21,5 @@ jobs:
           php: 7.4
           mwbranch: REL1_39
           extension: DummyExtension
-          dependencies:
-            - name: examples
-              checkout:
-                path: mediawiki/extensions/examples
-                repository: wikimedia/mediawiki-extensions-examples
+          dependencies: ${{ toJson( &dependencies ) }}
           extra_file: .github/PHPUnitSettings.php
