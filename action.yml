@@ -65,9 +65,7 @@ runs:
         path: mediawiki/${{ inputs.type }}s/${{ inputs.extension }}
 
     - name: Install dependencies
-      uses: ./dependency-action
-      with:
-        dependencies: ${{ inputs.dependencies }}
+      uses: bash $GITHUB_ACTION_PATH/deps.sh ${{ inputs.dependencies }} ${{ fromJSON( inputs.dependencies ) }}
 
     - name: Composer updates
       working-directory: mediawiki
