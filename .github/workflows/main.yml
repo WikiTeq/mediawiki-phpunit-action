@@ -1,11 +1,5 @@
 on: [push]
 
-dependencies: &dependencies
-  - name: examples
-    checkout:
-      path: mediawiki/extensions/examples
-      repository: wikimedia/mediawiki-extensions-examples
-
 jobs:
   mediawiki-extension-action-sqlite:
     runs-on: ubuntu-latest
@@ -21,5 +15,5 @@ jobs:
           php: 7.4
           mwbranch: REL1_39
           extension: DummyExtension
-          dependencies: ${{ toJson( &dependencies ) }}
+          dependencies: "[{ \"path\": \"mediawiki/extensions/examples\", \"repository\": \"wikimedia/mediawiki-extensions-examples\" }]"
           extra_file: .github/PHPUnitSettings.php
