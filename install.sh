@@ -61,6 +61,7 @@ if [ -n "${EXTRA_INCLUDE_FILE}" ]; then
 fi
 
 # Include everything from `extensions` and `skins` directories
+# Plus extensions that were cloned before mediawiki was
 cat <<EOT > composer.local.json
 {
   "require": {},
@@ -69,7 +70,8 @@ cat <<EOT > composer.local.json
       "merge-dev": true,
       "include": [
         "extensions/*/composer.json",
-        "skins/*/composer.json"
+        "skins/*/composer.json",
+        "../*/composer.json"
       ]
     }
   }
