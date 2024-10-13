@@ -60,19 +60,27 @@ if [ -n "${EXTRA_INCLUDE_FILE}" ]; then
   echo "require_once \"$INCLUDE_PATH\";" >> LocalSettings.php
 fi
 
-# Include everything from `extensions` and `skins` directories
-# Plus extensions that were cloned before mediawiki was
+# To support loading the composer.json of any dependency extensions that were
+# cloned before MediaWiki was, we need to find those - they should be installed
+# in the same directory that mediawiki was, i.e. one directory up from here;
+# we cannot just use the composer-merge-plugin handling with a glob like
+# `../*/composer.json` since that will recursively load itself and cause
+# problems. Instead we want to
+# - find all composer.json files that are in directories at the same level
+#   as the current directory
+# - exclude the composer.json file that is in the current directory
+# - format each of those entries, and add them to the list
+EXTRACOMPOSER=$(ls ../*/composer.json 2>/dev/null | grep --invert $(basename $(pwd)/) | xargs -t -I% echo \"%\",)
 cat <<EOT > composer.local.json
 {
   "require": {},
   "extra": {
     "merge-plugin": {
       "merge-dev": true,
-      "recurse": false,
       "include": [
+        $EXTRACOMPOSER
         "extensions/*/composer.json",
-        "skins/*/composer.json",
-        "../*/composer.json"
+        "skins/*/composer.json"
       ]
     }
   }
