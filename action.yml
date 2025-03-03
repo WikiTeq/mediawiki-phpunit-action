@@ -46,7 +46,7 @@ runs:
         key: composer-php${{ inputs.php }}
 
     - name: Download Mediawiki
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         path: mediawiki
         repository: wikimedia/mediawiki
@@ -56,7 +56,7 @@ runs:
       run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.extension }} ${{ inputs.type }} ${{ inputs.use_mysql }} ${{ inputs.extra_file }}
       shell: bash
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         path: mediawiki/${{ inputs.type }}s/${{ inputs.extension }}
 
