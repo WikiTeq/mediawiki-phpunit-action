@@ -7,7 +7,7 @@ jobs:
     steps:
       # check out the repository
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Test dummy extension
         uses: ./ # Uses an action in the root directory
         id: extension-test
@@ -22,7 +22,7 @@ jobs:
     steps:
       # check out the repository
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Test dummy extension
         uses: ./ # Uses an action in the root directory
         id: extension-test
