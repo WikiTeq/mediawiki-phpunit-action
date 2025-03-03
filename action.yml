@@ -40,7 +40,7 @@ runs:
         PHP_EXTENSIONS: ${{ inputs.use_mysql && 'mbstring, intl, mysqli' || 'mbstring, intl' }}
 
     - name: Add Composer cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.composer/cache
         key: composer-php${{ inputs.php }}
