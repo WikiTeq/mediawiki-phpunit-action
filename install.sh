@@ -7,6 +7,21 @@ TYPE=$2
 USE_MYSQL=$3
 EXTRA_INCLUDE_FILE=$4
 
+# Validate inputs to prevent PHP injection in generated LocalSettings.php
+# Extension/skin names: alphanumeric, underscore, hyphen only
+case "$EXTENSION_NAME" in
+	*[!a-zA-Z0-9_-]*|"") echo "Error: extension name must be non-empty and only [a-zA-Z0-9_-]" >&2; exit 1 ;;
+esac
+case "$TYPE" in
+	extension|skin) ;;
+	*) echo "Error: type must be 'extension' or 'skin'" >&2; exit 1 ;;
+esac
+if [ -n "${EXTRA_INCLUDE_FILE}" ]; then
+	case "$EXTRA_INCLUDE_FILE" in
+		*..*|*[!a-zA-Z0-9_./-]*) echo "Error: extra_file must be a relative path without '..'" >&2; exit 1 ;;
+	esac
+fi
+
 if [ "$USE_MYSQL" = "true" ]; then
   DB_TYPE="mysql"
   DB_SERVER="127.0.0.1"
