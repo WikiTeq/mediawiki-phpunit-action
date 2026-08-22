@@ -40,23 +40,23 @@ runs:
         PHP_EXTENSIONS: ${{ inputs.use_mysql && 'mbstring, intl, mysqli' || 'mbstring, intl' }}
 
     - name: Add Composer cache
-      uses: actions/cache@v4
+      uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
       with:
         path: ~/.composer/cache
         key: composer-php${{ inputs.php }}
 
     - name: Download Mediawiki
-      uses: actions/checkout@v4
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       with:
         path: mediawiki
         repository: wikimedia/mediawiki
         ref: ${{ inputs.mwbranch }}
 
     - name: Install MediaWiki
-      run: bash $GITHUB_ACTION_PATH/install.sh ${{ inputs.extension }} ${{ inputs.type }} ${{ inputs.use_mysql }} ${{ inputs.extra_file }}
+      run: bash "$GITHUB_ACTION_PATH/install.sh" '${{ inputs.extension }}' '${{ inputs.type }}' '${{ inputs.use_mysql }}' '${{ inputs.extra_file }}'
       shell: bash
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       with:
         path: mediawiki/${{ inputs.type }}s/${{ inputs.extension }}
 
