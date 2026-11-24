@@ -72,5 +72,13 @@ runs:
 
     - name: Run PHPUnit
       working-directory: mediawiki
-      run: php tests/phpunit/phpunit.php --testsuite extensions --exclude-group Broken,ParserFuzz,Stub
+      run: |
+        # Release branches still ship tests/phpunit/phpunit.php. MediaWiki master
+        # removed it (T395470); generate phpunit.xml and run the extension tests.
+        if [ -f tests/phpunit/phpunit.php ]; then
+          php tests/phpunit/phpunit.php --testsuite extensions --exclude-group Broken,ParserFuzz,Stub
+        else
+          php tests/phpunit/generatePHPUnitConfig.php
+          vendor/bin/phpunit "${{ inputs.type }}s/${{ inputs.extension }}/tests/phpunit" --exclude-group Broken,ParserFuzz,Stub
+        fi
       shell: bash
