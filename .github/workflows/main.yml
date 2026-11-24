@@ -1,33 +1,38 @@
 on: [push]
 
 jobs:
-  mediawiki-extension-action-sqlite:
+  test:
     runs-on: ubuntu-latest
-    name: Dummy extension test (sqlite)
+    name: "Dummy extension: MW ${{ matrix.mw }}, PHP ${{ matrix.php }}, ${{ matrix.db }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Current LTS. PHP is the minimum that branch requires.
+          - mw: REL1_43
+            php: "8.1"
+            db: sqlite
+            use_mysql: false
+          - mw: REL1_43
+            php: "8.1"
+            db: mysql
+            use_mysql: true
+          # Development branch. Its composer.json requires PHP 8.3.
+          - mw: master
+            php: "8.3"
+            db: sqlite
+            use_mysql: false
+          - mw: master
+            php: "8.3"
+            db: mysql
+            use_mysql: true
     steps:
-      # check out the repository
       - name: Checkout
         uses: actions/checkout@v4
       - name: Test dummy extension
-        uses: ./ # Uses an action in the root directory
-        id: extension-test
+        uses: ./
         with:
-          php: 7.4
-          mwbranch: REL1_39
+          php: ${{ matrix.php }}
+          mwbranch: ${{ matrix.mw }}
           extension: DummyExtension
-
-  mediawiki-extension-action-mysql:
-    runs-on: ubuntu-latest
-    name: Dummy extension test (mysql)
-    steps:
-      # check out the repository
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Test dummy extension
-        uses: ./ # Uses an action in the root directory
-        id: extension-test
-        with:
-          php: 7.4
-          mwbranch: REL1_39
-          extension: DummyExtension
-          use_mysql: true
+          use_mysql: ${{ matrix.use_mysql }}
